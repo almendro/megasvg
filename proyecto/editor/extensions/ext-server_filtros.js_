@@ -1,0 +1,45 @@
+/*
+ * ext-server_opensave.js
+ *
+ * Licensed under the Apache License, Version 2
+ *
+ * Copyright(c) 2010 Alexis Deveria
+ *
+ * Modificado por Ernesto Bazzano (c) Compartido bajo licencia AGPL
+ *
+*/
+
+svgEditor.addExtension("filtros", function(s) {
+	return {
+		name: "filtros",
+		svgicons: "extensions/ext-consola-icon.xml",
+		buttons: [{
+			id: "filtros",
+			type: "context",
+			panel: "editor_panel",
+			title: "Aplicar filtros",
+			events: {
+				'click': function() {
+				// Create upload target (hidden iframe)
+				var target = $('<iframe name="output_frame" src="#"/>').hide().appendTo('body');
+				var save_svg_action = 'extensions/filtro.php';
+				var svg = "<?xml version=\"1.0\"?>\n" + svgCanvas.getSvgString();
+				var title = svgCanvas.getDocumentTitle();
+				var filename = title.replace(/[^a-z0-9\.\_\-]+/gi, '_');
+				var objeto_seleccionado = svgCanvas.getSelectedElems(); // tengo que obtener los ID de estos objetos
+				var objeto_seleccionado = objeto_seleccionado[0].id;
+				// alert(svgCanvas.getStrokeColor());
+				var form = $('<form>').attr({
+					method: 'post',
+					action: save_svg_action,
+					target: 'output_frame'})
+					.append('<input type="hidden" name="output_svg" value="' + encodeURI(svg) + '">')
+					.append('<input type="hidden" name="filename" value="' + filename + '">')
+					.append('<input type="hidden" name="objeto_seleccionado" value="' + objeto_seleccionado + '">')
+					.appendTo('body')
+					.submit().remove();
+					}
+				}
+			}]
+		};
+});

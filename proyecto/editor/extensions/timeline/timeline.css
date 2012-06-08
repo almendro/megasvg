@@ -1,0 +1,8 @@
+/* TIME CSS MEGANIMATOR */
+
+#timeline{
+	z-index:5000;
+}
+#keyEditDialog{
+	z-index:5001;
+}

@@ -46,7 +46,7 @@
 #svg_editor #svgcanvas {
 	line-height: normal;
 	display: inline-block;
-	background-color: #A0A0A0;
+	background-color: #FFF;
 	text-align: center;
 	vertical-align: middle;
 	width: 640px;
@@ -58,9 +58,11 @@
 	/* 
 	  A subtle gradient effect in the canvas.
 	  Just experimenting - not sure if this is worth it.
+	*/
 	background: -moz-radial-gradient(45deg,#bbb,#222);
 	background: -webkit-gradient(radial, center center, 3, center center, 1000, from(#bbb), to(#222));
-	*/
+	background: transparent !important;
+
 
 }
 
@@ -73,7 +75,7 @@
 
 #mega_gui #ruler_corner {
 	top: 0px;
-	left: 41px;
+	left: 1px;
 	width: 15px;
 	height: 15px;
 }
@@ -81,8 +83,8 @@
 #mega_gui #ruler_x {
 	height: 15px;
 	top: 0px;
-	left: 56px;
-	right: 30px;
+	left: 16px;
+	right: 15px;
 	border-bottom: 1px solid;
 	border-left: 1px solid #777;
 }
@@ -95,7 +97,7 @@
 #mega_gui #ruler_y {
 	width: 15px;
 	top: 15px;
-	left: 41px;
+	left: 1px;
 	bottom: 15px;
 	border-right: 1px solid;
 	border-top: 1px solid #777;
@@ -193,16 +195,16 @@
 	display: inline-table-cell;
 	position:absolute;
 	top: 0; /* 75px; */
-	left: 40px;
+	left: 0; /* 40px; */
 	bottom: 0; /* 62px; */
-	right: 14px;
-	background-color: #666;
+	right: 0; /* 14px; */
+	background-color: #FFF;
 	border: 1px solid #808080;
 	overflow: auto;
 	text-align: center;
 }
 
-#svg_editor #sidepanels {
+#mega_gui #svg_editor #sidepanels {
 	display: inline-block;
 	position:absolute;
 	top: 75px;
@@ -210,10 +212,7 @@
 	right: 0px;
 	width: 2px;
 	padding: 10px;
-	border-color: #808080;
-	border-style: solid;
-	border-width: 1px;
-	border-left: none;
+	border:0 none;
 }
 
 #svg_editor #layerpanel {
@@ -227,7 +226,8 @@
 	margin: 0px;
 	-moz-user-select: none;
 	-webkit-user-select: none;
-
+	background:#DDD;
+	padding-left:4px;
 }
 
 /*
@@ -235,20 +235,21 @@
 	border-color: #666;
 	border-width: 0px 0px 0px 1px;	
 */
-#svg_editor #sidepanel_handle {
+#mega_gui #svg_editor #sidepanel_handle {
 	display: inline-block;
 	position: absolute;
 	background-color: #D0D0D0;
-	font-weight: bold;
+	font-weight: normal;
 	left: 0px;
 	top: 40%;
 	width: 1em;
 	padding: 5px 1px 5px 5px;
-	margin-left: 3px;
+	margin-left: 0px;
 	cursor: pointer;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	border-radius:          3px 0 0 3px;
+	-moz-border-radius:     3px 0 0 3px;
+	-webkit-border-radius:  3px 0 0 3px;
+	
 	-moz-user-select: none;
 	-webkit-user-select: none;
 }
@@ -304,12 +305,12 @@
 	cursor: pointer;
 }
 
-#svg_editor #layerlist {
-	margin: 1px;
+#mega_gui #svg_editor #layerlist {
+	margin: 0px;
 	padding: 0px;
-	width: 127px;
+	width: 100%;
 	border-collapse: collapse;	
-	border: 1px solid #808080;
+	border: 0 none;
 	background-color: #FFFFFF;
 }
 
@@ -362,10 +363,10 @@
 	float: left;
 }
 
-#svg_editor #main_button {
+#mega_gui #svg_editor #main_button {
 	position: absolute;
-	top: 4px;
-	left: 4px;
+	top: 16px;
+	left: 16px;
 	z-index: 5;
 }
 
@@ -483,25 +484,42 @@
 
 #mega_gui #svg_editor #tools_top {
 	position: absolute;
+	/*
 	left: 150px;
 	right: 150px;
-	top: 0px;
+	top: -70px;
 	height: 72px;
-	border-bottom: 1px solid #333;
+	border-bottom: 1px solid #f00;
 	overflow: auto;
 	z-index:1000;
 	background-color:#DDD;
+	*/
+	background-color: transparent;
+	top: 50%;
+	left: 50%;
+	width: 50px;
+	height: 50px;
+	border-bottom: none;
+	z-index:1000;
+	overflow: visible;
 }
-
-#svg_editor #tools_left {
+#mega_gui #svg_editor #tools_top:hover{
+	/*top:0;*/
+}
+#mega_gui #svg_editor #tools_left {
 	position: absolute;
 	border-right: none;
 	width: 32px;
 	top: 75px;
-	left: 0;
+	left: -34px;
 	padding-left: 2px;
-	background: #D0D0D0; /* Needed so flyout icons don't appear on the left */
+	padding-right: 2px;
+	border-right:1px solid #f00;
+	background: #DDD; /* Needed so flyout icons don't appear on the left */
 	z-index: 4;
+}
+#mega_gui #svg_editor #tools_left:hover{
+	left:0;
 }
 
 #workarea.wireframe #svgcontent * {
@@ -1415,3 +1433,11 @@ span.zoom_tool {
 .contextMenu LI.delete A { background-image: url(images/page_white_delete.png); }
 .contextMenu LI.quit A { background-image: url(images/door.png); }
 */
+
+
+
+/* CircleMenu */
+
+.item{
+
+}

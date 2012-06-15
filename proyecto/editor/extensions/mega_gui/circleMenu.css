@@ -1,0 +1,40 @@
+
+
+/* CircleMenu */
+.circle_menu{
+	/*position: relative;*/
+}
+
+.circle_menu li:first-child,
+.circle_menu .item:first-child,
+.circle_menu .item_primero
+ {
+    background:#FFF;
+    display:block;
+}
+.circle_menu .item_primero
+{
+	border:1px solid #ccc;
+}
+.circle_menu li,
+.circle_menu .item
+{
+    /*background:#000;*/
+    /*color:#fff;
+    font-size:25px;*/
+}
+.circle_menu .item
+{
+/*
+	width: 30px;
+	height: 30px;
+	*/
+}
+.circle_menu a{
+	/*
+    text-decoration: none;
+    color:#fff;
+    */
+    display:block;
+
+}

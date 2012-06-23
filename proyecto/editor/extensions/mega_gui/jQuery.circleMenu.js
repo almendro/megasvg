@@ -178,6 +178,7 @@
 		        	}
         		}
         		
+        		console.log ( "ASIGNAR EVENTO AL MENU CIRCULAR "+jQuery(item_primero));
             item_primero.on('click',function(evt){
                 evt.preventDefault();
                 if(self._state === 'closed' || self._state === 'closing'){

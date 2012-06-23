@@ -21,13 +21,39 @@ svgEditor.addExtension("btn_mega_gui", function(s) {
 	jQuery('<link rel="stylesheet" type="text/css" href="'+url_extension+'circleMenu.css" />').appendTo('head');
 	jQuery('<script type="text/javascript" src="'+url_extension+'jQuery.circleMenu.js"></script>').appendTo('head');
 	
-	jQuery('html').keyup(function(e) {
-		//alert('');
-	});
 	
 	// Es necesario crear un botón que sirva para activar el menú circular. Luego hay que cambiarlo por otra cosa. El class 'item_primero' es obligadorio, el plugin circleMenu lo busca.
 	
 	jQuery('#tools_top').prepend('<div class="item_primero"><a href="#">[M]</a></div>');
+	
+	// evento para doblekey
+	var doblekey_ultima, doblekey_dif;
+	
+	jQuery('html').keyup(function(e) {
+		//alert('');
+		
+		//("shiftKey "+e.shiftKey);
+		console.log("html keyup "+e.shiftKey);
+		// comprobamos que se haya pulsado SHIFT
+		if ( e.shiftKey ) {
+			
+			// comprobamos si ya se habia pulsado antes
+			if ( doblekey_ultima ) {
+				// calculamos la diferencia tomando el timeStamp del evento, ver la variable (e) en la llamada a la function (esto lo genera jQuery automaticamente)
+				doblekey_dif = e.timeStamp - doblekey_ultima;
+				console.log('doblekey_dif '+doblekey_dif);
+				// umbral de activacion para el doblekey
+				if ( doblekey_dif > 100 && doblekey_dif < 400 ) {
+					jQuery('#tools_top .item_primero').click();
+				}
+			} 
+			// capturamos la pulsación actual
+			doblekey_ultima = e.timeStamp;
+		}
+		
+	});
+	
+
 
 	
 	return {
@@ -65,6 +91,10 @@ svgEditor.addExtension("btn_mega_gui", function(s) {
 								item_diameter: 32,
 		            direction:'full', 
 		            trigger:'click',
+                speed: 200,
+		            delay: 200,
+		            step_out: 20,
+		            step_in: -20,
 		            div: true,
 		            item_primero: 'item_primero',
 		            open: function(){

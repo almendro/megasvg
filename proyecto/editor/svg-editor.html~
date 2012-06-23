@@ -44,6 +44,8 @@
 
 <!-- you can load extensions here -->
 <!-- <script type="text/javascript" src="extensions/ext-helloworld.js"></script> -->
+<script type="text/javascript" src="extensions/ext.js"></script>
+<script type="text/javascript" src="extensions/ext-mega_gui.js"></script>
 
 <!-- always minified scripts -->
 <script type="text/javascript" src="jquery-ui/jquery-ui-1.8.17.custom.min.js"></script>
@@ -54,6 +56,16 @@
 <link rel="alternate" type="application/atom+xml" title="SVG-edit Updates (Issues/Fixes/Commits)" href="http://code.google.com/feeds/p/svg-edit/updates/basic" />
 
 <!-- Add script with custom handlers here -->
+
+<script language='javascript' >
+//<![CDATA[	
+	$(document).ready(function(){
+		console.log('DOMREADY!!!');
+		activar_ext();
+	});
+//]]>	
+</script>
+		
 <title>SVG-edit</title>
 </head>
 <body>

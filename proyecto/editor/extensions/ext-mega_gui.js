@@ -52,7 +52,7 @@ svgEditor.addExtension("btn_mega_gui", function(s) {
 							
 							// Al desactivar mega_gui también hay que limpiar estilos que se agregar a los elementos con el atributo 'style' y de esta manera restaurar el aspecto original del css. Se utiliza un 'setTimeout' porque hay que esperar un momento. Esto se puede solucionar si se revisan los timeout del plugin circleMenu.
 							
-							'
+							
 							jQuery('#tools_top > div').css({
 								'position':'absolute',
 								'z-index': '1'

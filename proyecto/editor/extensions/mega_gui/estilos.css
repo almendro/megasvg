@@ -484,7 +484,6 @@
 
 #mega_gui #svg_editor #tools_top {
 	position: absolute;
-	/*
 	left: 150px;
 	right: 150px;
 	top: -70px;
@@ -493,7 +492,10 @@
 	overflow: auto;
 	z-index:1000;
 	background-color:#DDD;
-	*/
+	
+}
+#mega_gui #svg_editor #tools_top.circle_menu{
+	position: absolute;
 	background-color: transparent;
 	top: 50%;
 	left: 50%;
@@ -504,7 +506,7 @@
 	overflow: visible;
 }
 #mega_gui #svg_editor #tools_top:hover{
-	/*top:0;*/
+	top:0;
 }
 #mega_gui #svg_editor #tools_left {
 	position: absolute;

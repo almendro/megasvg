@@ -9,7 +9,8 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
-
+var timeline_interval;
+var tmp4874874=0;
 var Timeline = function() {    
   this.name = "Global";
   this.anims = [];   
@@ -19,7 +20,8 @@ var Timeline = function() {
 	this.loopMode = 0;	 
 	this.playing = true;
 	var self = this;   
-	setInterval(function() {
+	timeline_interval = setInterval(function() {
+		console.log("interval "+tmp4874874++);
 	  self.update();
 	}, 1000/30);
 }   
@@ -28,6 +30,7 @@ Timeline.currentInstance = null;
 
 Timeline.getGlobalInstance = function() {
 	if (!Timeline.globalInstance) {
+		alert("crear una nueva Timeline");
 		Timeline.globalInstance = new Timeline();
 	}                                      
 	return Timeline.globalInstance;

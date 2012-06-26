@@ -905,21 +905,22 @@ Timeline.prototype.save = function() {
   	}
   	data[track.id] = keysData;
   }      
-  
+  /*
   localStorage["timeline.js.settings.canvasHeight"] = this.canvasHeight;                              
   localStorage["timeline.js.settings.timeScale"] = this.timeScale;                              
   localStorage["timeline.js.data." + this.name] = JSON.stringify(data);
+  */
 } 
 
 Timeline.prototype.load = function() {      
   if (localStorage["timeline.js.settings.canvasHeight"]) {
-    this.canvasHeight = localStorage["timeline.js.settings.canvasHeight"];                              
+    //this.canvasHeight = localStorage["timeline.js.settings.canvasHeight"];                              
   }
   if (localStorage["timeline.js.settings.timeScale"]) {
-    this.timeScale = localStorage["timeline.js.settings.timeScale"];                              
+    //this.timeScale = localStorage["timeline.js.settings.timeScale"];                              
   }
 //alert(this.name	);
-  var dataString = localStorage["timeline.js.data." + this.name];
+  var dataString;// localStorage["timeline.js.data." + this.name];
   if (!dataString) return;                 
   var data = JSON.parse(dataString);  
   for(var i=0; i<this.tracks.length; i++) {
@@ -943,4 +944,4 @@ Timeline.prototype.load = function() {
   }  
 }    
 
-localStorage = {}
+//localStorage = {}

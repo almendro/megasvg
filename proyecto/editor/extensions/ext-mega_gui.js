@@ -24,7 +24,7 @@ svgEditor.addExtension("btn_mega_gui", function(s) {
 	
 	// Es necesario crear un botón que sirva para activar el menú circular. Luego hay que cambiarlo por otra cosa. El class 'item_primero' es obligadorio, el plugin circleMenu lo busca.
 	
-	jQuery('#tools_top').prepend('<div class="item_primero"><a href="#">[M]</a></div>');
+	//jQuery('#tools_top').prepend('<div class="item_primero"><a href="#">[M]</a></div>');
 	
 	// evento para doblekey
 	var doblekey_ultima, doblekey_dif;
@@ -43,10 +43,23 @@ svgEditor.addExtension("btn_mega_gui", function(s) {
 				doblekey_dif = e.timeStamp - doblekey_ultima;
 				console.log('doblekey_dif '+doblekey_dif);
 				// umbral de activacion para el doblekey
-				if ( doblekey_dif > 100 && doblekey_dif < 400 ) {
+				if ( doblekey_dif > 100 && doblekey_dif < 400 && $('#tools_top'),hasClass('circle_menu')) {
 					jQuery('#tools_top .item_primero').click();
 				}
 			} 
+			// capturamos la pulsación actual
+			doblekey_ultima = e.timeStamp;
+		}
+		else if (e.which==77)
+		{
+			if ( doblekey_ultima ) {
+				doblekey_dif = e.timeStamp - doblekey_ultima;
+				console.log('doblekey_dif '+doblekey_dif);
+				// umbral de activacion para el doblekey
+				if ( doblekey_dif > 100 && doblekey_dif < 400 ) {
+					jQuery('#btn_mega_gui').click();
+				}
+			}
 			// capturamos la pulsación actual
 			doblekey_ultima = e.timeStamp;
 		}
@@ -78,14 +91,14 @@ svgEditor.addExtension("btn_mega_gui", function(s) {
 							
 							// Al desactivar mega_gui también hay que limpiar estilos que se agregar a los elementos con el atributo 'style' y de esta manera restaurar el aspecto original del css. Se utiliza un 'setTimeout' porque hay que esperar un momento. Esto se puede solucionar si se revisan los timeout del plugin circleMenu.
 							
-							
+							/*
 							jQuery('#tools_top > div').css({
 								'position':'absolute',
 								'z-index': '1'
 							});
-							
-							jQuery('#tools_top .push_button, #tools_top .tool_button').addClass('item');
-							
+							*/
+							//jQuery('#tools_top .push_button, #tools_top .tool_button').addClass('item');
+							/*
 							jQuery('#tools_top').addClass('circle_menu').circleMenu({
 								circle_radius: 190,
 								item_diameter: 32,
@@ -112,7 +125,7 @@ svgEditor.addExtension("btn_mega_gui", function(s) {
 			        }).on('circleMenu-open',function(){
 		            //console.log('menu opened 2');
 			        });
-			        
+			        */
 		
 						} else {
 						

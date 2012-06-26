@@ -13,9 +13,10 @@
 */
 
 
-
-localStorage["timeline.js.data.Global"] = [];
+//localStorage["timeline.js.data.Global"] = [];
 var var_animacion = {};
+
+
 
 svgEditor.addExtension("btn_timeline", function(s) {
 	// variables 
@@ -26,6 +27,9 @@ svgEditor.addExtension("btn_timeline", function(s) {
 	$('<script type="text/javascript" src="extensions/timeline/timeline-gui.js"></script>').appendTo('head');
 	$('<script type="text/javascript" src="extensions/timeline/RequestAnimationFrame.js"></script>').appendTo('head');
 
+	var anim_primera_vez = true;
+
+	
 	//---------------ejecutador de buffer----------------
 	return {
 		name: "btn_timeline",
@@ -36,7 +40,10 @@ svgEditor.addExtension("btn_timeline", function(s) {
 			panel: "editor_panel",
 			title: "Show/Hide Timeline",
 			events: {
+				
 				'click': function() { 
+				
+
 						if (!$('#btn_timeline').hasClass('push_button_pressed')) {
 							$('#btn_timeline').addClass('push_button_pressed');
 							//-------------
@@ -44,9 +51,14 @@ svgEditor.addExtension("btn_timeline", function(s) {
 								// ID del objeto 
 								id = svgCanvas.getSelectedElems()[o].id;
 								// lo agrega a la matriz de elmentos
-								var_animacion["#"+id]  = {element: $("#"+id)};
+								if ( ! var_animacion ['#'+id] ) {
+									var_animacion["#"+id]  = {element: $("#"+id)};
+								
+								
 								attributos = document.getElementById(id).attributes;
-								a = [];
+								
+								a = [];	// 
+							
 								for(var i in attributos) {
 									if (typeof attributos[i] == 'object') {
 										numero = Number(attributos[i].value);
@@ -55,23 +67,39 @@ svgEditor.addExtension("btn_timeline", function(s) {
 										}
 									}
 								}
-							a	if (a) anim("#"+id, var_animacion["#"+id]).to(a, 0);
+								if (a) anim("#"+id, var_animacion["#"+id]).to(a, 0);
+							
+								} else {
+									anim("#"+id, var_animacion["#"+id]);
+								}
+								
 							}
-							Timeline.getGlobalInstance().loop(-1);
+							if(anim_primera_vez){
+								Timeline.getGlobalInstance().loop(-1);
+								//anim_primera_vez = false;
+							}
+
 							draw();
 						} else {
 							$('#btn_timeline').removeClass('push_button_pressed');
-							Timeline.getGlobalInstance().stop();
-							/* 
-                                                        Timeline.currentInstance = null;
-							Timeline.globalInstance = false; 
-                                                        */
+
+							//Timeline.getGlobalInstance().stop();
+              //Timeline.currentInstance = null;
+
+              Timeline.globalInstance = false;
+              
+							clearInterval ( timeline_interval );
+							
+							//$("#timeline").delay(200).detach();
+							$("#timeline").detach();
+							//$("#timeline").delay(400).detach();
+              $("#keyEditDialog").detach();
 						}
-					}
-				}
+					} // click
+				} // events
 			}]
-		}
-});
+		}// return
+}); // addExtension
 
 function draw() {
 	for(var o in var_animacion) {
@@ -88,3 +116,4 @@ function draw() {
 	}
 	requestAnimationFrame(draw, this);
 }
+

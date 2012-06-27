@@ -26,45 +26,65 @@ svgEditor.addExtension("btn_mega_gui", function(s) {
 	
 	//jQuery('#tools_top').prepend('<div class="item_primero"><a href="#">[M]</a></div>');
 	
-	// evento para doblekey
-	var doblekey_ultima, doblekey_dif;
+
+
+	// doblekey intercepta que se haya pulsado dos veces una tecla y ejecuta una acción.
+
+	var doblekey_ultima=null, 	// timeStamp de la ultima vez que se presionó una tecla
+			doblekey_diferencia=0, // diferencia de tiempo
+			doblekey_tecla=null, 		// ultima tecla presionada
+			doblekey_tecla_actual;	
+
+
 	
 	jQuery('html').keyup(function(e) {
-		//alert('');
 		
-		//("shiftKey "+e.shiftKey);
-		console.log("html keyup "+e.shiftKey);
-		// comprobamos que se haya pulsado SHIFT
-		if ( e.shiftKey ) {
+		console.log("html keyup "+e.which);
+		
+		doblekey_tecla_actual = e.which;
+
+		// comprobamos si ya se habia pulsado antes la misma tecla
+		if ( doblekey_ultima!=null && doblekey_tecla == doblekey_tecla_actual ) {
+		
+			// calculamos la diferencia tomando el timeStamp del evento, ver la variable (e) en la llamada a la function (esto lo genera jQuery automaticamente)
+			doblekey_diferencia = e.timeStamp - doblekey_ultima;
+			console.log('doblekey_diferencia '+doblekey_diferencia);
 			
-			// comprobamos si ya se habia pulsado antes
-			if ( doblekey_ultima ) {
-				// calculamos la diferencia tomando el timeStamp del evento, ver la variable (e) en la llamada a la function (esto lo genera jQuery automaticamente)
-				doblekey_dif = e.timeStamp - doblekey_ultima;
-				console.log('doblekey_dif '+doblekey_dif);
-				// umbral de activacion para el doblekey
-				if ( doblekey_dif > 100 && doblekey_dif < 400 && $('#tools_top'),hasClass('circle_menu')) {
-					jQuery('#tools_top .item_primero').click();
-				}
-			} 
-			// capturamos la pulsación actual
-			doblekey_ultima = e.timeStamp;
-		}
-		else if (e.which==77)
-		{
-			if ( doblekey_ultima ) {
-				doblekey_dif = e.timeStamp - doblekey_ultima;
-				console.log('doblekey_dif '+doblekey_dif);
-				// umbral de activacion para el doblekey
-				if ( doblekey_dif > 100 && doblekey_dif < 400 ) {
-					jQuery('#btn_mega_gui').click();
-				}
-			}
-			// capturamos la pulsación actual
-			doblekey_ultima = e.timeStamp;
-		}
+			// umbral de activacion para el doblekey
+			if ( doblekey_diferencia > 100 && doblekey_diferencia < 400 ){
+			
+				switch (doblekey_tecla_actual)
+				{
+					case 16: // SHIFT
+					 if (jQuery('#tools_top').hasClass('circle_menu')) {
+							jQuery('#tools_top .item_primero').click();
+						}
+					break;
+					
+					case 77: // M
+						jQuery('#btn_mega_gui').click(); // activa o desactiva MEGAGUI
+					break;
+					
+					case 82: // R - muestra/oculta las reglas
+						var reglas = jQuery('#rulers');
+						if(reglas.css('visibility')=='visible'){
+							reglas.css('visibility','hidden');
+						} else {
+							reglas.css('visibility','visible');
+						}
+						
+					break;
+				}// switch
+				
+			} // if dif > 100 < 400
+			
+		}// if doblekey_ultima
 		
-	});
+		// capturamos la pulsación actual
+		doblekey_ultima = e.timeStamp;
+		doblekey_tecla = doblekey_tecla_actual;
+		console.log ("doblekey_tecla "+doblekey_tecla)
+	}); // html.keyup
 	
 
 

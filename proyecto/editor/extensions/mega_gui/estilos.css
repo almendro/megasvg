@@ -199,20 +199,23 @@
 	bottom: 0; /* 62px; */
 	right: 0; /* 14px; */
 	background-color: #FFF;
-	border: 1px solid #808080;
+	border: 0 none;
 	overflow: auto;
 	text-align: center;
 }
 
-#mega_gui #svg_editor #sidepanels {
+#mega_gui #svg_editor #sidepanels 
+{
 	display: inline-block;
-	position:absolute;
+	position: absolute;
 	top: 75px;
 	bottom: 60px;
-	right: 0px;
+	right: 2px;
 	width: 2px;
 	padding: 10px;
-	border:0 none;
+	border-width: 0;
+	border-color: transparent;
+	border-style: none;
 }
 
 #svg_editor #layerpanel {
@@ -554,15 +557,19 @@
 }
 
 #mega_gui #cur_context_panel {
+	/* no se para que se usa esta DIV */
 	position: absolute;
 	top: 16px; /* 77px; */
 	left: 40px;
 	right: 0;
 	line-height: 22px;
 	overflow: auto;
+	/*
 	border: 1px solid #777;
 	border-bottom: none;
 	border-right: none;
+	*/
+	border:0px transparent none;
 	padding-left: 5px;
 	font-size: 12px;
 }

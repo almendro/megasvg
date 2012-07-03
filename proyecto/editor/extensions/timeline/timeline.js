@@ -21,7 +21,7 @@ var Timeline = function() {
 	this.playing = true;
 	var self = this;   
 	timeline_interval = setInterval(function() {
-		console.log("interval "+tmp4874874++);
+		//console.log("interval "+tmp4874874++);
 	  self.update();
 	}, 1000/30);
 }   

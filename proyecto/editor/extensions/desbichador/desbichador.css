@@ -4,8 +4,9 @@
 	width:400px;
 	height:300px;
 	top:10px;
-	left:10px;
+	right:10px;
 	color:#eee;
+	z-index: 10000;
 }
 #desbichador_contenido{
 	position:relative;

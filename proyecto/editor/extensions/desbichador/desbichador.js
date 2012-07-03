@@ -7,10 +7,12 @@ v 0.1 - 2012-04-27
 
 */
 
-
+var trace;
 var desbichador_salida;
 var desbichador_n;
+
 function desbichador_init(){
+	//alert("desbichador_init");
 	desbichador_salida = $('#desbichador_salida pre');
 	$desbichador_contenido = $("#desbichador_contenido");
 	desbichador_n = 0;
@@ -20,6 +22,7 @@ function desbichador_init(){
 function fnull(){};
 
 function desbichador (e){
+
 	return desbichador_salida.append('<div><span>'+(desbichador_n++)+'</span>'+e+'</div>');
 }
 
@@ -31,7 +34,7 @@ function desbichador_visualizar(){
 
 function desbichador_ver(e){
 
-
+console.log('EEEEEEE');
 	/* 	Devuelve una cadena (String)
 		de un 'trace' especialmente formateado para objetos y arrays
 

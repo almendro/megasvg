@@ -12,17 +12,29 @@
 	extensions/desbichador/desbichador.css
 */
 
+//alert("DESBICHADOR");
+
+
 
 svgEditor.addExtension("btn_desbichador", function(s) {
 
 	var url_extension = "extensions/desbichador/";
 	
 	jQuery('<link rel="stylesheet" type="text/css" href="'+url_extension+'desbichador.css" />').appendTo('head');
-//	jQuery('<link rel="stylesheet" type="text/css" href="'+url_extension+'circleMenu.css" />').appendTo('head');
 	jQuery('<script type="text/javascript" src="'+url_extension+'desbichador.js"></script>').appendTo('head');
 	
+
 	
+	// --- --- --- INTERFAZ --- --- ---
+	jQuery('body').append("<div id=\"desbichador\"><div id=\"desbichador_contenido\"><div id=\"desbichador_fondo\"></div><div id=\"desbichador_activador\"></div><div id=\"desbichador_panel\"><div class=\"desbichador_variable\">(+)</div></div><div id=\"desbichador_salida\"><pre></pre></div><!-- #desbichador_salida --></div><!-- #desbichador_contenido --></div><!-- #desbichador -->").addClass(function(){
+		desbichador_init();
+		return ' ';
+	});
 	
+		
+	
+/*	
+	')
 	// --- --- --- EVENTOS DE TECLADO --- --- ---
 	
 	// doblekey intercepta que se haya pulsado dos veces una tecla y ejecuta una acción.
@@ -126,7 +138,7 @@ svgEditor.addExtension("btn_desbichador", function(s) {
 					switch (doblekey_tecla_actual)
 					{
 					}
-					*/
+					* /
 				}
 				
 			} // if dif > 100 < 400
@@ -142,13 +154,8 @@ svgEditor.addExtension("btn_desbichador", function(s) {
 	}); // html.keyup
 	
 
-	// --- --- --- MENU CIRCULAR --- --- ---
-	
-	// Es necesario crear un botón que sirva para activar el menú circular. Luego hay que cambiarlo por otra cosa. El class 'item_primero' es obligadorio, el plugin circleMenu lo busca.
-	
-	//jQuery('#tools_top').prepend('<div class="item_primero"><a href="#">[M]</a></div>');
 
-
+*/
 	
 	return {
 		name: "btn_desbichador",
@@ -173,7 +180,7 @@ svgEditor.addExtension("btn_desbichador", function(s) {
 						else // desactivar
 						{
 						
-							jQuery('#btn_mega_gui').removeClass('push_button_pressed');
+							jQuery('#btn_desbichador').removeClass('push_button_pressed');
 							
 						}
 						

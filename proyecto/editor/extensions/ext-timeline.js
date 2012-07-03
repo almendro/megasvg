@@ -16,7 +16,7 @@
 //localStorage["timeline.js.data.Global"] = [];
 var var_animacion = {};
 
-A.length
+
 
 svgEditor.addExtension("btn_timeline", function(s) {
 	// variables 

@@ -1,0 +1,64 @@
+
+#desbichador{
+	position:absolute;
+	width:400px;
+	height:300px;
+	top:10px;
+	left:10px;
+	color:#eee;
+}
+#desbichador_contenido{
+	position:relative;
+	width:100%;
+	height:100%;
+	/*background-color:#f00;*/
+}
+#desbichador_fondo{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:#000;
+	opacity:.8;
+	z-index:1;
+}
+#desbichador_salida{
+	color:#eee;
+	overflow:auto;
+	width:98%;
+	height:50%;
+	border:1px solid #AAA;
+	margin:1%;
+	top:46%;
+	position:absolute;
+	z-index:100;
+	
+}
+#desbichador pre div{
+	clear:both;
+	color:#eee;
+	display:block;
+	text-align:left;
+	
+	 white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+	 white-space: -pre-wrap;      /* Opera 4-6 */
+	 white-space: -o-pre-wrap;    /* Opera 7 */
+	 white-space: pre-wrap;       /* css-3 */
+	 
+}
+#desbichador pre div span{
+	padding-right:1em;
+	display:block;
+	float:left;
+	color:#bbb;
+	text-align:right;
+}
+
+/* http://bytes.com/topic/html-css/answers/627827-how-wrap-text-css */
+.wrapword{
+ white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ white-space: pre-wrap;       /* css-3 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+

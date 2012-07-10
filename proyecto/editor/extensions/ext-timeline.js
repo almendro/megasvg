@@ -27,8 +27,6 @@ svgEditor.addExtension("btn_timeline", function(s) {
 	$('<script type="text/javascript" src="extensions/timeline/timeline-gui.js"></script>').appendTo('head');
 	$('<script type="text/javascript" src="extensions/timeline/RequestAnimationFrame.js"></script>').appendTo('head');
 
-	var anim_primera_vez = true;
-
 	
 	//---------------ejecutador de buffer----------------
 	return {
@@ -48,109 +46,89 @@ svgEditor.addExtension("btn_timeline", function(s) {
 						
 							// activa la linea de tiempo
 							
-							$('#btn_timeline').addClass('push_button_pressed');
-							//-------------
+							
+							if (svgCanvas.getSelectedElems()<' ') return; // Mandar algun mensaje que cuando falte el objeto seleccionado
+							
+							eval(code);
+							
+							$('#btn_timeline').addClass('push_button_pressed'); // pone el aspecto de marcado al botón
+							
+							
 							for(var o in svgCanvas.getSelectedElems()) {
 								// ID del objeto 
 								id = svgCanvas.getSelectedElems()[o].id;
 								// lo agrega a la matriz de elmentos
 								
-								trace (" id = " + id + " ... var_animacion ? "+(! var_animacion ['#'+id]));
 								
 								if ( ! var_animacion ['#'+id] ) {
 									var_animacion["#"+id]  = {element: $("#"+id)};
-								
-								
-								attributos = document.getElementById(id).attributes;
-								
-								a = [];	// 
+									attributos = document.getElementById(id).attributes;
+									a = [];
 							
-								for(var i in attributos) {
-									if (typeof attributos[i] == 'object') {
-										numero = Number(attributos[i].value);
-										if (numero) {
-											a[attributos[i].name] = attributos[i].value ;
+									for(var i in attributos) {
+										if (typeof attributos[i] == 'object') {
+											numero = Number(attributos[i].value);
+											if (numero) a[attributos[i].name] = Number(attributos[i].value);
 										}
 									}
-								}
-								if (a) anim("#"+id, var_animacion["#"+id]).to(a, 0);
-							
-																//if ( ! var_animacion ['#'+id] ) {
-																} else {
-									// ya existe el objteo en var_animacion
+								
+									if (a) anim("#"+id, var_animacion["#"+id]).to(a, 0);
 									
-								alert ('que hacemo!');
-								trace ( code );
-								eval(code);
+								} else {
+								
+									// ya existe el objteo en var_animacion	
+									// eval(code); // ya no va más, pero por la dudas
 									
 								}
 								
-							}
-							if(anim_primera_vez){
-								Timeline.getGlobalInstance().loop(-1);
-								//anim_primera_vez = false;
-							}
-
-
-							//desbichador(" var_animacion "+ desbichador_ver({p: var_animacion}));
+							}// for o
 							
 							
+							Timeline.getGlobalInstance().loop(-1);
 							draw();
 							
 						} else {
 							
 							// desactiva la linea de tiempo
 							
-															
-									var mi_linea = Timeline.getGlobalInstance();
-									
-									for(var i=0; i<mi_linea.tracks.length; i++) {
-										var track = mi_linea.tracks[i];
-										if (track.type == "object") continue;
-										if (track.anims.length == 0) continue;
-										code += 'anim("' + track.parent.name + '",$("' + track.parent.name + '"))';
-									
-									// HAY QUE TOCAR ACAAAAAAA !!!!!!!!!
-									// está duplicando el track del objeto SVG, hay que hacer que solo arme el track y luego los subtracks.
-										
-										for(var j=0; j<track.anims.length; j++) {
-											var anim2 = track.anims[j];   
-											code += '.to(';
-											if (anim2.delay) 
-												code += anim2.delay + ',';
-											code += '{' + '"' + anim2.propertyName + '"' + ':' + anim2.endValue + '}';      
-											code += ',' + (anim2.endTime - anim2.startTime);                          
-											if (anim2.easing != Timeline.Easing.Linear.EaseNone) 
-												code += ', Timeline.Easing.' + Timeline.easingFunctionToString(anim2.easing);
-											code += ')';
-											//code += '.to(' + anim.delay + ',{' + '"' + anim.propertyName + '"' + ':' + anim.endValue + '} ')';
-										}
-										
-										//code += ';\n';
-										code += ';';
-									}
-									trace(code);
-									//
-									
+													
+							var mi_linea = Timeline.getGlobalInstance();
+							var track_parent_name;
+							code = "";
+							
+							for(var i=0; i<mi_linea.tracks.length; i++) {
+								var track = mi_linea.tracks[i];
+								if (track.type == "object") continue;
+								if (track.anims.length == 0) continue;
+								code += 'anim("' + track.parent.name + '", var_animacion["' + track.parent.name + '"] )';
+								
+								for(var j=0; j<track.anims.length; j++) {
+									var anim2 = track.anims[j];   
+									code += '.to(';
+									if (anim2.delay) code += anim2.delay + ',';
+									code += '{' + '"' + anim2.propertyName + '"' + ':' + anim2.endValue + '}';      
+									code += ',' + (anim2.endTime - anim2.startTime);                          
+									if (anim2.easing != Timeline.Easing.Linear.EaseNone) code += ', Timeline.Easing.' + Timeline.easingFunctionToString(anim2.easing);
+									code += ')';
+								}								
+								code += ';';
+							}
+
+							
+							trace ( 'code '+desbichador_ver(code));
 							
 							$('#btn_timeline').removeClass('push_button_pressed');
-
-							//Timeline.getGlobalInstance().stop();
-              //Timeline.currentInstance = null;
 
               Timeline.globalInstance = false;
               
 							clearInterval ( timeline_interval );
 							
-							//$("#timeline").delay(200).detach();
 							$("#timeline").detach();
-							//$("#timeline").delay(400).detach();
               $("#keyEditDialog").detach();
-						}
+              
+						} // else
 						
 
-						
-						
 					} // click
 				} // events
 			}]
@@ -163,7 +141,9 @@ function draw() {
 	
 	for(var o in var_animacion) {
 		// objeto a poner en la linea de tiempo
+
 		var attributos = document.getElementById(o.slice(1)).attributes;
+			
 		for(var i in attributos) {
 			if (typeof attributos[i] == 'object') {
 				// crea una linea de tiempo con los atributos del objeto
@@ -175,4 +155,3 @@ function draw() {
 	}
 	requestAnimationFrame(draw, this);
 }
-

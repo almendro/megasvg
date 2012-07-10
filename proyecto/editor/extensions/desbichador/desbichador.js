@@ -46,8 +46,16 @@ console.log('EEEEEEE');
 	*/
 		
 
-	var p = e.p;
-	var n = e.n;
+	var p,n;
+	
+	if(e.p==undefined && e.n==undefined){
+		p = e;
+		n = 1;
+	} else {
+		p = e.p;
+		n = e.n;		
+	}
+
 	
 	
 	

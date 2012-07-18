@@ -38,4 +38,9 @@ Al 10/07/2012 logramos agregar elementos y **animarlos** por separado, ya nos es
 
 Ver video: http://ompldr.org/vZXFrMw/megasvg_720_x640.ogv
 
-![video](http://ompldr.org/vZXFrMw/megasvg_720_x640.ogv)
+Quehaceres
+----------
+
+- Hacer capturas y más demos
+- Correjir detalles y la linea de tiempo
+- Hacer clones de objetos con el tag <use />

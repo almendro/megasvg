@@ -1,0 +1,4 @@
+Los Archivos PNG estan en baja calidad,
+una vez terminada la toma se tiene que 
+reexportar con los PSD ubicados en ./PSD
+

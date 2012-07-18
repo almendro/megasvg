@@ -28,6 +28,7 @@ svgEditor.addExtension("btn_desbichador", function(s) {
 	// --- --- --- INTERFAZ --- --- ---
 	jQuery('body').append("<div id=\"desbichador\"><div id=\"desbichador_contenido\"><div id=\"desbichador_fondo\"></div><div id=\"desbichador_activador\"></div><div id=\"desbichador_panel\"><div class=\"desbichador_variable\">(+)</div></div><div id=\"desbichador_salida\"><pre></pre></div><!-- #desbichador_salida --></div><!-- #desbichador_contenido --></div><!-- #desbichador -->").addClass(function(){
 		desbichador_init();
+                $("#desbichador").hide();
 		return ' ';
 	});
 	
@@ -169,7 +170,7 @@ svgEditor.addExtension("btn_desbichador", function(s) {
 				'click': function() { 
 				
 						if (!jQuery('#btn_desbichador').hasClass('push_button_pressed')) {
-						
+						        $("#desbichador").show();
 							// activa 
 							jQuery('#btn_desbichador').addClass('push_button_pressed');
 							
@@ -179,9 +180,9 @@ svgEditor.addExtension("btn_desbichador", function(s) {
 						} 
 						else // desactivar
 						{
-						
+
 							jQuery('#btn_desbichador').removeClass('push_button_pressed');
-							
+                                                        $("#desbichador").hide();							
 						}
 						
 					}// <<< click
